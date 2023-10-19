@@ -23,14 +23,7 @@ app <- init(
     )
   ),
   header = "R/Pharma 2023 teal Workshop",
-  filter = teal_slices(
-    teal_slice(dataname = "iris", varname = "Species", selected = "virginica"),
-    teal_slice(dataname = "mtcars", varname = "cyl", selected = c(6, 8), fixed = TRUE),
-    teal_slice(dataname = "mtcars", varname = "gear", anchored = TRUE),
-    teal_slice(dataname = "mtcars", varname = "am", selected = 1, anchored = TRUE, fixed = TRUE),
-    teal_slice(dataname = "iris", expr = "Petal.Length > 4 & Petal.Width > 1", title = "Custom iris", id = "custom_iris"),
-    count_type = "all"
-  )
+  filter = 
 )
 
 shinyApp(app$ui, app$server)

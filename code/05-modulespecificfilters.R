@@ -68,22 +68,7 @@ app <- init(
     )
   ),
   header = "R/Pharma 2023 teal Workshop",
-  filter = teal_slices(
-    teal_slice(dataname = "ADSL", varname = "ITTFL", id = "ittfl", selected = "Y", fixed = T, anchored = T),
-    teal_slice(dataname = "ADSL", varname = "SAFFL", id = "saffl", selected = "Y", fixed = T, anchored = T),
-    teal_slice(dataname = "ADAE", varname = "AESER", id = "aeser", anchored = T),
-    teal_slice(dataname = "ADAE", id = "aerel", expr = "AEREL == 'Y' & AETOXGR %in% c('3', '4', '5')", title = "Grade 3+ Related Events"),
-    teal_slice(dataname = "ADSL", varname = "SEX", id = "sex", selected = "F", fixed = T),
-    teal_slice(dataname = "ADSL", id = "youngadult", expr = "AGE >= 18 & AGE <= 30", title = "Young Adult"),
-    module_specific = T,
-    mapping = list(
-      "Demographic Table" = c("ittfl"),
-      "AE Table" = c("saffl", "aeser", "aerel"),
-      "KM Plot" = c("ittfl"),
-      global_filters = c("ittfl", "sex", "youngadult")
-    ),
-    count_type = "all"
-  )
+  filter = 
 )
 
 shinyApp(app$ui, app$server)

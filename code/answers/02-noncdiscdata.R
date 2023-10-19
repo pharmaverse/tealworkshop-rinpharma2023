@@ -1,7 +1,14 @@
+# teal with non-cdisc data
 # ?teal_data
 # ?dataset
+# Show what the data object looks like
+# 
+# Let's use a module from teal.modules.general
 # ?teal.modules.general -> index
 # ?tm_data_table
+# use tm_data_table, change the label value to "Data Table Module"
+# 
+# add header: R/Pharma 2023 teal Workshop
 
 library(teal.modules.general)
 
@@ -12,10 +19,10 @@ app <- init(
   ),
   modules = modules(
     tm_data_table(
-      label = "My Data Table"
+      label = "Data Table Module"
     )
   ),
-  header = "R/Pharma Workshop"
+  header = "R/Pharma 2023 teal Workshop",
 )
 
 shinyApp(app$ui, app$server)
