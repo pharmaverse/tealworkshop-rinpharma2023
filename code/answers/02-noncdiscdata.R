@@ -1,6 +1,7 @@
 # ?teal_data
 # ?dataset
 # ?teal.modules.general -> index
+# ?tm_data_table
 
 library(teal.modules.general)
 
@@ -14,7 +15,7 @@ app <- init(
       label = "My Data Table"
     )
   ),
-  header = "my teal app"
+  header = "R/Pharma Workshop"
 )
 
 shinyApp(app$ui, app$server)

@@ -1,8 +1,10 @@
 # ?teal.modules.clinical -> index
 # 
-# Check available example datam from tmc
+# Check available example data from tmc
 # data(package = "teal.modules.clinical")
 # add tm_t_summary
+# - arm_var: choices ARM, ARMCD : selected = "ARM"
+# - summarize_vars: choices "SEX", "RACE", "BMRKR2", "EOSDY", "DCSREAS", "AGE" : selected "SEX", "RACE"
 # let's add visualization module
 # add tm_t_events module
 # - arm_var: choices ARM, ARMCD : selected = "ARM"
@@ -11,7 +13,9 @@
 # add tm_g_km module
 # - arm_var: variable choices ARM, ARMCD, ACTARMCD : selected = "ARM"
 # - paramcd: value choices PARAMCD, PARAM : selected = "OS"
-# - arm_var: choices ARM, ARMCD, ACTARMCD : selected = "ARM"
+# - strata_var: variable choices SEX BMRKR2 : selected = NULL
+# - facet_var: variable choices SEX BMRKR2 : selected = NULL
+# - plot_height 600, 400, 5000
 
 library(teal.modules.clinical)
 
