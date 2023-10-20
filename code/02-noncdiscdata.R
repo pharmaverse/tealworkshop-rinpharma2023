@@ -14,15 +14,8 @@
 library(teal.modules.general)
 
 app <- init(
-  data = teal_data(
-    dataset("iris", iris),
-    dataset("mtcars", mtcars)
-  ),
-  modules = modules(
-    tm_data_table(
-      label = "Data Table Module"
-    )
-  ),
+  data = ,
+  modules = ,
   header = "R/Pharma 2023 teal Workshop"
 )
 
