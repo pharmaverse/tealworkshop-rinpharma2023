@@ -1,4 +1,5 @@
 # teal with non-cdisc data
+# 
 # ?teal_data
 # ?dataset
 # Show what the data object looks like
@@ -22,7 +23,7 @@ app <- init(
       label = "Data Table Module"
     )
   ),
-  header = "R/Pharma 2023 teal Workshop",
+  header = "R/Pharma 2023 teal Workshop"
 )
 
 shinyApp(app$ui, app$server)

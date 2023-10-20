@@ -3,6 +3,8 @@
 # ?teal::init --> filter argument
 # ?teal::teal_slices
 # ?teal.slice::teal_slice
+# 
+# add default filter on iris, Sepal.Length column
 # add default filter on iris, Species column, with selected value virginica
 # add count_type argument and set it to "all", what happens now?
 # add default fixed filter on mtcars, cyl column, with selected value 6, 8

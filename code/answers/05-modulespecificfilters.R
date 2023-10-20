@@ -2,15 +2,12 @@
 #
 # Let's add meaningful filters to the module
 # tm_t_summary: 
-# - Intention-to-Treat population: ADSL.ITTFL == Y, fixed & anchored
+# - Safety-evaluable population: ADSL.SAFFL == Y, fixed & anchored
 #
 # tm_t_events: 
 # - Safety-evaluable population: ADSL.SAFFL == Y, fixed & anchored
 # - Serious Events: ADAE.AESER, anchored
 # - Grade 3+ Related Events: ADAE.AEREL == 'Y' & ADAE.AETOXGR %in% c('3', '4', '5'), custom expression
-#
-# tm_g_km:
-# - Intention-to-Treat population: ADSL.ITTFL == Y, fixed & anchored (same as tm_t_summary)
 #
 # Global filters for all three modules
 # Female only: ADSL.SEX == 'F', fixed (optional)
@@ -20,7 +17,7 @@
 # ?teal::teal_slices
 # 
 # important arguments: module_specific and mapping
-# don't forget count_type = 'all' =)
+# don't forget count_type = 'all'
 
 library(teal.modules.clinical)
 
@@ -69,18 +66,16 @@ app <- init(
   ),
   header = "R/Pharma 2023 teal Workshop",
   filter = teal_slices(
-    teal_slice(dataname = "ADSL", varname = "ITTFL", id = "ittfl", selected = "Y", fixed = T, anchored = T),
-    teal_slice(dataname = "ADSL", varname = "SAFFL", id = "saffl", selected = "Y", fixed = T, anchored = T),
-    teal_slice(dataname = "ADAE", varname = "AESER", id = "aeser", anchored = T),
-    teal_slice(dataname = "ADAE", id = "aerel", expr = "AEREL == 'Y' & AETOXGR %in% c('3', '4', '5')", title = "Grade 3+ Related Events"),
-    teal_slice(dataname = "ADSL", varname = "SEX", id = "sex", selected = "F", fixed = T),
-    teal_slice(dataname = "ADSL", id = "youngadult", expr = "AGE >= 18 & AGE <= 30", title = "Young Adult"),
-    module_specific = T,
+    teal_slice("ADSL", "SAFFL", id = "saffl", selected = "Y", fixed = TRUE, anchored = TRUE),
+    teal_slice("ADAE", "AESER", anchored = TRUE),
+    teal_slice("ADAE", id = "aerel", expr = "AEREL == 'Y' & AETOXGR %in% c('3', '4', '5')", title = "Grade 3+ Related Events"),
+    teal_slice("ADSL", "SEX", id = "sex", fixed = TRUE),
+    teal_slice("ADSL", id = "age", expr = "AGE >= 18 & AGE <= 30", title = "Young Adult"),
+    module_specific = TRUE,
     mapping = list(
-      "Demographic Table" = c("ittfl"),
-      "AE Table" = c("saffl", "aeser", "aerel"),
-      "KM Plot" = c("ittfl"),
-      global_filters = c("ittfl", "sex", "youngadult")
+      "Demographic Table" = c("saffl"),
+      "AE Table" = c("saffl", "aerel"),
+      global_filters = c("sex", "age")
     ),
     count_type = "all"
   )

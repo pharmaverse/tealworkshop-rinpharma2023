@@ -7,16 +7,18 @@
 # data(package = "teal.modules.clinical")
 # let's get data from tmc: ADSL, ADAE, and ADTTE
 # 
-# add tm_t_summary
+# add tm_t_summary on ADSL
+# - label = "Demographic Table"
 # - arm_var: choices ARM, ARMCD : selected = "ARM"
 # - summarize_vars: choices "SEX", "RACE", "BMRKR2", "EOSDY", "DCSREAS", "AGE" : selected "SEX", "RACE"
 # 
 # let's add visualization module
 # 
-# add tm_t_events module
+# add tm_t_events module on ADAE
+# - label: Adverse Event Table
 # - arm_var: choices ARM, ARMCD : selected = "ARM"
-# - hlt: variable_choices "AEBODSYS", "AESOC" : selected = "AEBODSYS"
 # - llt: variable_choices "AETERM", "AEDECOD" : selected = "AEDECOD"
+# - hlt: variable_choices "AEBODSYS", "AESOC" : selected = "AEBODSYS"
 # 
 # explain about variable_choices wrapper
 # explain about value_choices wrapper
@@ -41,36 +43,55 @@ app <- init(
     cdisc_dataset("ADTTE", ADTTE, code = "ADTTE <- teal.modules.clinical::tmc_ex_adtte")
   ),
   modules = modules(
+    # module 
     tm_t_summary(
-      label = "Demographic Table", 
-      dataname = "ADSL",
-      arm_var = choices_selected(choices = c("ARM", "ARMCD"), selected = "ARM"),
+      "Demographic Table",
+      "ADSL",
+      arm_var = choices_selected(
+        choices = c("ARMCD", "ARM"),
+        selected = "ARM"
+      ),
       summarize_vars = choices_selected(
         choices = c("SEX", "RACE", "BMRKR2", "EOSDY", "DCSREAS", "AGE"),
         selected = c("SEX", "RACE")
       )
     ),
     tm_t_events(
-      label = "AE Table",
-      dataname = "ADAE",
-      arm_var = choices_selected(choices = c("ARM", "ARMCD"), selected = "ARM"),
+      "Adverse Event Table",
+      "ADAE",
+      arm_var = choices_selected(
+        choices = variable_choices(ADSL, c("ARMCD", "ARM")),
+        selected = "ARM"
+      ),
+      llt = choices_selected(
+        choices = variable_choices(ADAE, c("AETERM", "AEDECOD")),
+        selected = "AEDECOD"
+      ),
       hlt = choices_selected(
         choices = variable_choices(ADAE, c("AEBODSYS", "AESOC")),
         selected = "AEBODSYS"
-      ),   
-      llt = choices_selected(
-        choices = variable_choices(ADAE, c("AETERM", "AEDECOD")),
-        selected = c("AEDECOD")
-      )
+      )      
     ),
     tm_g_km(
-      label = "KM Plot",
-      dataname = "ADTTE",
-      arm_var = choices_selected(choices = c("ARM", "ARMCD", "ACTARMCD"), selected = "ARM"),
-      paramcd = choices_selected(choices = value_choices(ADTTE, "PARAMCD", "PARAM"), selected = "OS"),
-      strata_var = choices_selected(variable_choices(ADSL, c("SEX", "BMRKR2")), NULL),
-      facet_var = choices_selected(variable_choices(ADSL, c("SEX", "BMRKR2")), NULL),
-      plot_height = c(600L, 400L, 5000L),
+      "KM PLot",
+      "ADTTE",
+      arm_var = choices_selected(
+        choices = variable_choices(ADSL, c("ARMCD", "ARM")),
+        selected = "ARM"
+      ),
+      paramcd = choices_selected(
+        choices = value_choices(ADTTE, "PARAMCD", "PARAM"),
+        selected = "OS"
+      ),
+      strata_var = choices_selected(
+        choices = c("SEX", "BMRKR2"),
+        selected = NULL
+      ),
+      facet_var = choices_selected(
+        choices = c("SEX", "BMRKR2"),
+        selected = NULL
+      ),
+      plot_height	= c(600L, 400L, 5000L)
     )
   ),
   header = "R/Pharma 2023 teal Workshop"

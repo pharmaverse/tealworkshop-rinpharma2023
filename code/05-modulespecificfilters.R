@@ -2,15 +2,12 @@
 #
 # Let's add meaningful filters to the module
 # tm_t_summary: 
-# - Intention-to-Treat population: ADSL.ITTFL == Y, fixed & anchored
+# - Safety-evaluable population: ADSL.SAFFL == Y, fixed & anchored
 #
 # tm_t_events: 
 # - Safety-evaluable population: ADSL.SAFFL == Y, fixed & anchored
 # - Serious Events: ADAE.AESER, anchored
 # - Grade 3+ Related Events: ADAE.AEREL == 'Y' & ADAE.AETOXGR %in% c('3', '4', '5'), custom expression
-#
-# tm_g_km:
-# - Intention-to-Treat population: ADSL.ITTFL == Y, fixed & anchored (same as tm_t_summary)
 #
 # Global filters for all three modules
 # Female only: ADSL.SEX == 'F', fixed (optional)
@@ -20,7 +17,7 @@
 # ?teal::teal_slices
 # 
 # important arguments: module_specific and mapping
-# don't forget count_type = 'all' =)
+# don't forget count_type = 'all'
 
 library(teal.modules.clinical)
 

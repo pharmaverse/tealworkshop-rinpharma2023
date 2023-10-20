@@ -7,16 +7,18 @@
 # data(package = "teal.modules.clinical")
 # let's get data from tmc: ADSL, ADAE, and ADTTE
 # 
-# add tm_t_summary
+# add tm_t_summary on ADSL
+# - label = "Demographic Table"
 # - arm_var: choices ARM, ARMCD : selected = "ARM"
 # - summarize_vars: choices "SEX", "RACE", "BMRKR2", "EOSDY", "DCSREAS", "AGE" : selected "SEX", "RACE"
 # 
 # let's add visualization module
 # 
-# add tm_t_events module
+# add tm_t_events module on ADAE
+# - label: Adverse Event Table
 # - arm_var: choices ARM, ARMCD : selected = "ARM"
-# - hlt: variable_choices "AEBODSYS", "AESOC" : selected = "AEBODSYS"
 # - llt: variable_choices "AETERM", "AEDECOD" : selected = "AEDECOD"
+# - hlt: variable_choices "AEBODSYS", "AESOC" : selected = "AEBODSYS"
 # 
 # explain about variable_choices wrapper
 # explain about value_choices wrapper
